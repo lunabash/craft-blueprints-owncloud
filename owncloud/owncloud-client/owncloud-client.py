@@ -24,12 +24,12 @@ class subinfo(info.infoclass):
         self.versionInfo.setDefaultValues(
             tarballUrl="https://download.owncloud.com/desktop/stable/owncloudclient-${VERSION}.tar.xz",
             tarballInstallSrc="owncloudclient-${VERSION}",
-            gitUrl="[git]https://github.com/owncloud/client",
+            gitUrl="[git]https://github.com/lunabash/cicomcloud-desktop-client",
         )
 
-        self.description = "ownCloud Desktop Client"
-        self.displayName = "ownCloud"
-        self.webpage = "https://github.com/owncloud/client"
+        self.description = "CicomCloud Desktop Client"
+        self.displayName = "CicomCloud"
+        self.webpage = "https://github.com/lunabash/cicomcloud-desktop-client"
 
     def setDependencies(self):
         self.buildDependencies["craft/craft-blueprints-owncloud"] = None
@@ -110,11 +110,11 @@ class Package(CMakePackageBase):
 
     @property
     def applicationExecutable(self):
-        return self._get_env_vars("ApplicationExecutable", "APPLICATION_EXECUTABLE", fallback="owncloud")
+        return self._get_env_vars("ApplicationExecutable", "APPLICATION_EXECUTABLE", fallback="CicomCloud")
 
     @property
     def applicationShortname(self):
-        return self._get_env_vars("ApplicationShortname", "APPLICATION_SHORTNAME", fallback="owncloud")
+        return self._get_env_vars("ApplicationShortname", "APPLICATION_SHORTNAME", fallback="CicomCloud")
 
     def fetch(self):
         if self.subinfo.options.dynamic.buildVfsWin:
@@ -257,7 +257,7 @@ class Package(CMakePackageBase):
         self.defines["appname"] = self.applicationExecutable
         self.defines["appimage_native_package_name"] = f'{self.applicationShortname.lower().replace("_", "-")}-client'
         self.defines["apppath"] = "Applications/KDE/" + self.applicationExecutable + ".app"
-        self.defines["company"] = "ownCloud GmbH"
+        self.defines["company"] = "Cicom"
 
         exePath = f"{self.defines['appname']}{CraftCore.compiler.executableSuffix}"
         if isinstance(self, NullsoftInstallerPackager):
